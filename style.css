@@ -1,4 +1,8 @@
 
+/* =========================================
+   1. GLOBAL SETTINGS
+========================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,24 +18,31 @@
   --text: #1e1b4b;
   --muted: #686879;
   --surface: #ffffff;
+  --border: rgba(99, 102, 241, 0.15);
 }
 
 body {
   background: var(--background);
   color: var(--text);
-  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* DARK MODE */
+/* =========================================
+   2. DARK MODE
+========================================= */
 
 body.dark {
   --background: #111827;
   --text: #f9fafb;
   --muted: #c0c4d0;
   --surface: #1f2937;
+  --border: rgba(255, 255, 255, 0.12);
 }
 
-/* HEADER */
+/* =========================================
+   3. HEADER AND NAVIGATION
+========================================= */
 
 header {
   display: flex;
@@ -41,14 +52,16 @@ header {
   background: var(--surface);
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 3px 20px rgba(0,0,0,0.05);
+  z-index: 1000;
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s;
 }
 
 .logo {
   font-size: 27px;
   font-weight: 800;
   color: var(--text);
+  letter-spacing: -1px;
 }
 
 .logo span {
@@ -57,6 +70,7 @@ header {
 
 nav {
   display: flex;
+  align-items: center;
   gap: 30px;
 }
 
@@ -64,11 +78,35 @@ nav a {
   text-decoration: none;
   color: var(--text);
   font-weight: 600;
-  transition: 0.3s;
+  position: relative;
+  transition: color 0.3s;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s;
 }
 
 nav a:hover {
   color: var(--primary);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* HEADER BUTTONS */
+
+.header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .header-buttons button {
@@ -76,15 +114,21 @@ nav a:hover {
   border: none;
   font-size: 23px;
   cursor: pointer;
-  margin-left: 12px;
   color: var(--text);
+  transition: transform 0.3s;
+}
+
+.header-buttons button:hover {
+  transform: scale(1.2);
 }
 
 #menuToggle {
   display: none;
 }
 
-/* HERO SECTION */
+/* =========================================
+   4. HERO SECTION
+========================================= */
 
 .hero {
   min-height: 85vh;
@@ -94,8 +138,13 @@ nav a:hover {
   padding: 70px 10%;
   gap: 40px;
   overflow: hidden;
+
   background:
-    radial-gradient(circle at 80% 20%, #ddd6fe 0, transparent 35%),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(196, 181, 253, 0.4),
+      transparent 35%
+    ),
     var(--background);
 }
 
@@ -107,7 +156,7 @@ nav a:hover {
 .tag {
   display: inline-block;
   color: var(--primary);
-  background: rgba(99,102,241,0.12);
+  background: rgba(99, 102, 241, 0.12);
   padding: 9px 16px;
   border-radius: 30px;
   font-size: 12px;
@@ -120,10 +169,18 @@ nav a:hover {
   font-size: clamp(40px, 6vw, 65px);
   line-height: 1.15;
   margin-bottom: 22px;
+  font-weight: 800;
+  letter-spacing: -2px;
 }
 
 .hero h1 span {
-  background: linear-gradient(90deg, #6366f1, #a855f7);
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #a855f7,
+    #ec4899
+  );
+
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -134,7 +191,12 @@ nav a:hover {
   font-size: 17px;
   line-height: 1.8;
   margin-bottom: 32px;
+  max-width: 550px;
 }
+
+/* =========================================
+   5. BUTTONS
+========================================= */
 
 .hero-buttons {
   display: flex;
@@ -142,26 +204,31 @@ nav a:hover {
   gap: 15px;
 }
 
-/* BUTTONS */
-
 .btn {
   display: inline-block;
   text-decoration: none;
   padding: 14px 25px;
   border-radius: 10px;
   font-weight: 700;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .primary {
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: linear-gradient(
+    90deg,
+    #6366f1,
+    #8b5cf6
+  );
+
   color: white;
-  box-shadow: 0 8px 20px rgba(99,102,241,0.25);
+
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
 }
 
 .primary:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(99,102,241,0.4);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(99, 102, 241, 0.4);
 }
 
 .secondary {
@@ -172,117 +239,348 @@ nav a:hover {
 .secondary:hover {
   background: var(--primary);
   color: white;
+  transform: translateY(-4px);
 }
 
-/* HERO DECORATION */
+/* =========================================
+   6. 3D ANIMATED SCENE
+========================================= */
 
 .hero-decoration {
   position: relative;
   width: 350px;
-  height: 350px;
+  height: 400px;
   flex-shrink: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
-.circle {
+/* 3D CARD */
+
+.three-d-card {
+  position: relative;
+  width: 290px;
+  height: 370px;
+  padding: 3px;
+
+  border-radius: 25px;
+
+  background: linear-gradient(
+    135deg,
+    #818cf8,
+    #c084fc,
+    #ec4899,
+    #6366f1
+  );
+
+  background-size: 300% 300%;
+  animation: gradientMove 5s ease infinite;
+
+  transform-style: preserve-3d;
+
+  transform:
+    rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg))
+    rotateZ(var(--rz, 0deg));
+
+  transition: transform 0.15s ease-out;
+
+  box-shadow:
+    0 30px 70px rgba(99, 102, 241, 0.3),
+    0 10px 25px rgba(0, 0, 0, 0.1);
+
+  z-index: 2;
+}
+
+/* CARD CONTENT */
+
+.card-content {
+  height: 100%;
+  border-radius: 23px;
+  padding: 30px;
+
+  color: white;
+
+  background: linear-gradient(
+    145deg,
+    #1e1b4b,
+    #312e81,
+    #581c87
+  );
+
+  transform: translateZ(20px);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+  position: relative;
+}
+
+/* CARD ICON */
+
+.card-icon {
+  font-size: 45px;
+  margin-bottom: 25px;
+  transform: translateZ(35px);
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.card-label {
+  color: #c4b5fd;
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.card-content h2 {
+  font-size: 38px;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  transform: translateZ(45px);
+}
+
+.card-content h2 span {
+  color: #c4b5fd;
+}
+
+.card-content p {
+  color: #d1d5db;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35px;
+  padding-top: 15px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+  color: #c4b5fd;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* =========================================
+   7. FLOATING 3D ORBS
+========================================= */
+
+.orb {
   position: absolute;
   border-radius: 50%;
+  filter: blur(1px);
+  pointer-events: none;
+  animation: orbFloat 5s ease-in-out infinite;
 }
 
-.circle-one {
-  width: 280px;
-  height: 280px;
-  background: linear-gradient(135deg, #818cf8, #c084fc);
-  top: 20px;
-  left: 35px;
-}
+.orb-one {
+  width: 120px;
+  height: 120px;
 
-.circle-two {
-  width: 100px;
-  height: 100px;
-  background: linear-gradient(135deg, #f9a8d4, #a78bfa);
+  top: 0;
   right: 0;
-  bottom: 5px;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    #fbcfe8,
+    #a855f7,
+    #4f46e5
+  );
+
+  box-shadow: 0 0 50px rgba(168, 85, 247, 0.4);
 }
 
-.floating-card {
-  position: absolute;
-  top: 100px;
+.orb-two {
+  width: 80px;
+  height: 80px;
+
+  bottom: 30px;
   left: 0;
-  width: 300px;
-  padding: 28px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.9);
-  color: #1e1b4b;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
-  backdrop-filter: blur(10px);
-  animation: float 3s ease-in-out infinite;
+
+  background: radial-gradient(
+    circle at 30% 30%,
+    #a5f3fc,
+    #6366f1
+  );
+
+  animation-delay: 1.5s;
 }
 
-.floating-card span {
-  font-size: 35px;
+/* =========================================
+   8. 3D ROTATE BUTTON
+========================================= */
+
+.rotate-btn {
+  position: absolute;
+  bottom: -10px;
+
+  padding: 11px 22px;
+
+  border: none;
+  border-radius: 30px;
+
+  background: var(--primary);
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  z-index: 5;
+
+  transition: all 0.3s ease;
 }
 
-.floating-card h3 {
-  margin: 12px 0;
+.rotate-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
 }
 
-.floating-card p {
-  color: #686879;
-}
+/* =========================================
+   9. ABOUT SECTION
+========================================= */
 
-/* ABOUT AND CONTACT */
-
-.about, .contact {
-  padding: 85px 20px;
+.about {
+  padding: 100px 20px;
   text-align: center;
+  background: var(--surface);
 }
 
-.about h2, .contact h2 {
+.about h2 {
   font-size: 36px;
   margin-bottom: 18px;
 }
 
-.about p, .contact p {
+.about p {
   max-width: 550px;
   margin: 0 auto 25px;
   color: var(--muted);
   line-height: 1.8;
 }
 
-/* FOOTER */
+/* =========================================
+   10. CONTACT SECTION
+========================================= */
+
+.contact {
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+.contact p {
+  max-width: 550px;
+  margin: 0 auto 25px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* =========================================
+   11. FOOTER
+========================================= */
 
 footer {
-  padding: 25px;
+  padding: 30px 20px;
+
   background: var(--surface);
   text-align: center;
+
   color: var(--muted);
   line-height: 2;
+
+  border-top: 1px solid var(--border);
 }
 
-/* ANIMATIONS */
+/* =========================================
+   12. SCROLL REVEAL
+========================================= */
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   13. ANIMATIONS
+========================================= */
 
 @keyframes slideUp {
   from {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* MOBILE RESPONSIVE */
+@keyframes orbFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(20deg);
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0) translateZ(35px);
+  }
+
+  50% {
+    transform: translateY(-10px) translateZ(35px);
+  }
+}
+
+/* =========================================
+   14. MOBILE RESPONSIVE DESIGN
+========================================= */
 
 @media (max-width: 768px) {
+
   header {
     padding: 18px 5%;
   }
+
+  /* MOBILE NAVIGATION */
 
   #menuToggle {
     display: inline-block;
@@ -290,15 +588,21 @@ footer {
 
   nav {
     display: none;
+
     position: absolute;
     top: 75px;
     left: 0;
+
     width: 100%;
+
     flex-direction: column;
     text-align: center;
+
     background: var(--surface);
+
     padding: 25px;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.08);
+
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
   }
 
   nav.active {
@@ -309,37 +613,111 @@ footer {
     padding: 10px;
   }
 
+  /* HERO */
+
   .hero {
     flex-direction: column;
     text-align: center;
+
     padding: 65px 7%;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .hero-buttons {
     justify-content: center;
   }
 
-  .hero-decoration {
-    transform: scale(0.85);
-    margin-top: 20px;
-  }
-
   .hero h1 {
     font-size: 42px;
   }
 
-  .about h2, .contact h2 {
+  /* 3D CARD */
+
+  .hero-decoration {
+    width: 100%;
+    max-width: 350px;
+    height: 390px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+  }
+
+  .three-d-card {
+    width: 260px;
+    height: 340px;
+  }
+
+  .card-content h2 {
+    font-size: 34px;
+  }
+
+  /* SECTIONS */
+
+  .about,
+  .contact {
+    padding: 75px 20px;
+  }
+
+  .about h2,
+  .contact h2 {
     font-size: 29px;
   }
 }
 
+/* =========================================
+   15. SMALL MOBILE DEVICES
+========================================= */
+
 @media (max-width: 380px) {
+
   .logo {
     font-size: 22px;
   }
 
-  .hero-decoration {
-    transform: scale(0.75);
-    margin: -10px 0;
+  .hero h1 {
+    font-size: 35px;
   }
+
+  .hero-decoration {
+    transform: scale(0.85);
+    margin: -5px 0;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .btn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   16. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
 }
