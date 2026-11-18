@@ -224,8 +224,8 @@ nav a:hover::after { width: 100%; }
 /* NEW PHOTO SLIDER */
 .photo-slider {
   position: relative;
-  width: 290px;
-  height: 165px;
+  width: 500px;
+  height: 300px;
   flex-shrink: 0;
   overflow: hidden;
   border-radius: 18px;
