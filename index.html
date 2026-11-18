@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Personal Website</title>
+  <meta name="description" content="Welcome to my personal website. Explore my ideas, skills, projects and experiences.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">MyWebsite<span>.</span></div>
+    <nav id="navbar">
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="header-buttons">
+      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+      <button id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="tag">WELCOME TO MY WEBSITE</span>
+        <h1>Welcome to <br><span>My Website</span></h1>
+        <p>A simple place to share your ideas, showcase your work, and connect with the world. Explore and discover something new!</p>
+        <div class="hero-buttons">
+          <a href="#about" class="btn primary">Get Started →</a>
+          <a href="#contact" class="btn secondary">Contact Me</a>
+        </div>
+      </div>
+
+      <!-- HERO VISUALS: NEW IMAGE SLIDER ABOVE THE ORIGINAL 3D CARD -->
+      <div class="hero-decoration" id="scene">
+        <div class="orb orb-one"></div>
+        <div class="orb orb-two"></div>
+
+        <!-- NEW: INDEPENDENT IMAGE SLIDER -->
+        <div class="photo-slider" id="photoSlider" aria-label="Photo slideshow">
+          <div class="photo-slide active">
+            <img src="images/photo1.jpg" alt="Slideshow photo one">
+          </div>
+          <div class="photo-slide">
+            <img src="images/photo2.jpg" alt="Slideshow photo two">
+          </div>
+          <div class="photo-slide">
+            <img src="images/photo3.jpg" alt="Slideshow photo three">
+          </div>
+
+          <button class="photo-arrow photo-prev" id="photoPrev" aria-label="Previous photo">‹</button>
+          <button class="photo-arrow photo-next" id="photoNext" aria-label="Next photo">›</button>
+
+          <div class="photo-dots" id="photoDots" aria-label="Choose photo">
+            <button class="photo-dot active" aria-label="Show photo 1"></button>
+            <button class="photo-dot" aria-label="Show photo 2"></button>
+            <button class="photo-dot" aria-label="Show photo 3"></button>
+          </div>
+        </div>
+
+        <!-- ORIGINAL 3D CARD: CONTENT AND EFFECTS PRESERVED -->
+        <div class="three-d-card" id="threeDCard">
+          <div class="card-content">
+            <div class="card-icon">🚀</div>
+            <span class="card-label">MY DIGITAL WORLD</span>
+            <h2>Think.<br>Create.<br><span>Innovate.</span></h2>
+            <p>Turning imagination into reality.</p>
+            <div class="card-bottom">
+              <span>CREATIVE PORTFOLIO</span>
+              <span>✦ 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ORIGINAL ROTATE BUTTON -->
+        <button class="rotate-btn" id="rotateCard">↻ Rotate 3D</button>
+      </div>
+    </section>
+
+    <section class="about reveal" id="about">
+      <span class="tag">GET TO KNOW ME</span>
+      <h2>About This Website</h2>
+      <p>This is my personal website where I share my ideas, interests, projects and experiences. I believe in continuous learning, creativity, and exploring new technologies.</p>
+      <a href="#contact" class="btn primary">Know More →</a>
+    </section>
+
+    <section class="contact reveal" id="contact">
+      <span class="tag">LET'S CONNECT</span>
+      <h2>Get In Touch</h2>
+      <p>Have something to share? I'd love to hear from you.</p>
+      <a href="mailto:your@email.com" class="btn primary">Send an Email →</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> MyWebsite. All Rights Reserved.</p>
+    <p>Designed with ❤️</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
